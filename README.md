@@ -1,2 +1,2 @@
-# KMITL-Office-Management
+# Office-Management Project
 Project for Kumpob and Opaspong
