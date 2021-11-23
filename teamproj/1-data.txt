@@ -1,0 +1,5 @@
+Name: James
+Age: 38
+Gender:Male
+Position:part-time
+Salary:35,000

@@ -1,0 +1,5 @@
+Name: May
+Age: 26
+Gender:Female
+Position:Full-time
+Salary:42,000

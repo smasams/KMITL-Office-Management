@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1637663560 source:c:\users\roma\desktop\uni\cprog\proj\teamproj\main.c
+	<stdio.h>
+	<stdlib.h>
+
