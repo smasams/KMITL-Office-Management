@@ -4,12 +4,15 @@
 char un[80];
 char pass[80];
 int userno;
-
+int z=0;
 void login(){
     int c=0;
     while(c==0){
 
         printf("Username or enter (q) to exit: ");
+        if(z==1){
+            fgets(un, 20, stdin);
+        }
         fgets(un, 20, stdin);
         un[strcspn(un, "\r\n")] = 0;
         if(strcmp (un, "q")==0){
@@ -87,7 +90,6 @@ void viewtask(){
     }
     else{
         printf("then do so");
-        exit(0);
     }
 }
 void givetask(){
@@ -106,7 +108,9 @@ void givetask(){
     printf("%s\n",s);
     fclose(fen);
     int emno;
+    printf("Input: ");
     scanf("%d",&emno);
+    printf("\n");
     char at[80];
     sprintf(at,"%d-task.txt",emno);
     FILE *ftask;
@@ -137,7 +141,9 @@ void seedata(){
     printf("%s\n",s);
     fclose(fen);
     int emno;
+    printf("Input: ");
     scanf("%d",&emno);
+    printf("\n");
     char ud[80];
     sprintf(ud,"%d-data.txt",emno);
     FILE *fdat;
@@ -158,24 +164,61 @@ void seedata(){
 
 int main()
 {
-    login();
-    int com;
-    if(strcmp (un, "admin")==0){
-        printf("command: (1)give task (2)see data: ");
-        scanf("%d",&com);
-    }
-    else{
-        printf("command: (0)view task: ");
-        scanf("%d",&com);
-    }
-    if(com==0){
-        viewtask();
-    }
-    else if(com==1){
-        givetask();
-    }
-    else if(com==2){
-        seedata();
+    int l=0;
+    while(l==0){
+        l=1;
+        login();
+        int com;
+        int c=0;
+        while(c==0){
+            if(strcmp (un, "admin")==0){
+            printf("command: (1)give task (2)see data: ");
+            scanf("%d",&com);
+                if(com==1){
+                    givetask();
+                    c=1;
+                }
+                else if(com==2){
+                    seedata();
+                    c=1;
+                }
+                else{
+                    printf("command doesn't exist\n");
+                    Sleep(1000);
+                    system("cls");
+                }
+                }
+            else{
+                printf("command: (0)view task: ");
+                scanf("%d",&com);
+                if(com==0){
+                    viewtask();
+                    c=1;
+                }
+                else{
+                    printf("command doesn't exist\n");
+                    Sleep(1000);
+                    system("cls");
+                }
+            }
+            if(c==1){
+                int r;
+                printf("\n\nAnything Else?: yes(1) No(0)");
+                scanf("%d",&r);
+                if(r==1){
+                    c=0;
+                }
+                if(c==0){
+                    printf("\ndo you want to login with another account?: yes(1) No(0)");
+                    scanf("%d",&r);
+                    if(r==1){
+                        l=0;
+                        c=1;
+                        z=1;
+                    }
+                }
+            }
+        }
     }
     return 0;
 }
