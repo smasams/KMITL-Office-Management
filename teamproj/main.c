@@ -58,6 +58,7 @@ void login(){
         }
         else{
             printf("fail");
+            z=0;
         }
         Sleep(1000);
         system("cls");
@@ -85,8 +86,11 @@ void viewtask(){
     scanf("%d",&comp);
     if(comp==1){
         ftask = fopen(ut, "w");
-        fprintf(ftask,"");
+        fprintf(ftask," ");
         fclose(ftask);
+        FILE *fcn= fopen("notif.txt","a");
+        fprintf(fcn,"%s has complete his/her task.\n",un);
+        fclose(fcn);
     }
     else{
         printf("then do so");
@@ -161,7 +165,34 @@ void seedata(){
     fclose(fdat);
 
 }
-
+void seenotif(){
+    FILE *fcn;
+    fcn = fopen("notif.txt", "r");
+    char ch;
+    char s[100];
+    int count=0;
+    ch=fgetc(fcn);
+    while(ch != EOF){
+        s[count]=ch;
+        ch=fgetc(fcn);
+        count++;
+    }
+    printf("%s\n",s);
+    fclose(fcn);
+    int del;
+    printf("\ndelete all notification?: yes(1) no(0)");
+    scanf("%d",&del);
+    if(del==1){
+        fcn = fopen("notif.txt", "w");
+        fprintf(fcn," ");
+        fclose(fcn);
+    }
+}
+void leaves(){
+    FILE *fcn= fopen("notif.txt","a");
+        fprintf(fcn,"%s request for leave of absence.\n",un);
+        fclose(fcn);
+}
 int main()
 {
     int l=0;
@@ -172,9 +203,13 @@ int main()
         int c=0;
         while(c==0){
             if(strcmp (un, "admin")==0){
-            printf("command: (1)give task (2)see data: ");
+            printf("command: (0)see notification (1)give task (2)see data: ");
             scanf("%d",&com);
-                if(com==1){
+                if(com==0){
+                    seenotif();
+                    c=1;
+                }
+                else if(com==1){
                     givetask();
                     c=1;
                 }
@@ -189,10 +224,14 @@ int main()
                 }
                 }
             else{
-                printf("command: (0)view task: ");
+                printf("command: (0)view task (1)apply for leaves: ");
                 scanf("%d",&com);
                 if(com==0){
                     viewtask();
+                    c=1;
+                }
+                else if(com==1){
+                    leaves();
                     c=1;
                 }
                 else{
