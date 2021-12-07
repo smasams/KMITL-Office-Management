@@ -8,7 +8,7 @@ int z=0;
 void login(){
     int c=0;
     while(c==0){
-
+        system("cls");
         printf("Username or enter (q) to exit: ");
         if(z==1){
             fgets(un, 20, stdin);
@@ -168,17 +168,13 @@ void seedata(){
 void seenotif(){
     FILE *fcn;
     fcn = fopen("notif.txt", "r");
-    char ch;
     char s[100];
-    int count=0;
-    ch=fgetc(fcn);
-    while(ch != EOF){
-        s[count]=ch;
-        ch=fgetc(fcn);
-        count++;
-    }
-    printf("%s\n",s);
-    fclose(fcn);
+    const size_t line_size = 300;
+    char* line = malloc(line_size);
+    while (fgets(line, line_size, fcn) != NULL)  {
+        strcpy(s, line);
+        }
+    printf("%s",s);
     int del;
     printf("\ndelete all notification?: yes(1) no(0)");
     scanf("%d",&del);
