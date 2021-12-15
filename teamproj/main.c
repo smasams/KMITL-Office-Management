@@ -88,6 +88,7 @@ void viewtask(){
         ftask = fopen(ut, "w");
         fprintf(ftask," ");
         fclose(ftask);
+        strcpy(s," ");
         FILE *fcn= fopen("notif.txt","a");
         fprintf(fcn,"%s has complete his/her task.\n",un);
         fclose(fcn);
